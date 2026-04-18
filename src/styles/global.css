@@ -1,138 +1,288 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	--accent: #bc52ee;
+	--accent-hover: #9333ea;
+	--accent-subtle: rgba(188, 82, 238, 0.15);
+	--accent-outline: #e8b4fe;
+	--text-primary: #ffffff;
+	--text-secondary: #c4c9d4;
+	--text-muted: #8b92a5;
+	--bg-primary: #0d0f14;
+	--bg-secondary: #1a1d24;
+	--bg-tertiary: #23262d;
+	--border: #333741;
+	--border-light: #2a2d35;
+	--shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+	--shadow-md: 0 6px 12px -2px rgba(0, 0, 0, 0.5);
+	--shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.5);
+	--radius-sm: 6px;
+	--radius: 10px;
+	--radius-lg: 14px;
+	--radius-xl: 18px;
+	--max-width: 1100px;
+	--content-width: 720px;
+	--header-height: 64px;
+
+	--font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+
+[data-theme="light"] {
+	--accent: #9333ea;
+	--accent-hover: #7e22ce;
+	--accent-subtle: rgba(147, 51, 234, 0.1);
+	--accent-outline: #a855f7;
+	--text-primary: #111827;
+	--text-secondary: #4b5563;
+	--text-muted: #9ca3af;
+	--bg-primary: #ffffff;
+	--bg-secondary: #f9fafb;
+	--bg-tertiary: #f3f4f6;
+	--border: #e5e7eb;
+	--border-light: #f3f4f6;
+	--shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
-@font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-bold.woff") format("woff");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
+
+* {
+	box-sizing: border-box;
 }
+
+html {
+	scroll-behavior: smooth;
+	height: 100%;
+}
+
 body {
-	font-family: "Atkinson", sans-serif;
+	font-family: var(--font-sans);
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	background: var(--bg-primary);
+	color: var(--text-primary);
+	font-size: 16px;
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+body > main {
+	flex: 1;
+}
+
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	width: 100%;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 0 1.5rem 4rem;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.75rem 0;
+	color: var(--text-primary);
+	line-height: 1.25;
 	font-weight: 700;
+	letter-spacing: -0.02em;
 }
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+strong, b {
+	font-weight: 600;
+}
+
 a {
 	color: var(--accent);
+	text-decoration: none;
+	transition: color 0.15s ease;
 }
 a:hover {
-	color: var(--accent);
+	color: var(--accent-hover);
 }
+
 p {
-	margin-bottom: 1em;
+	margin: 0 0 1.25rem 0;
 }
-.prose p {
-	margin-bottom: 2em;
-}
+
 textarea {
 	width: 100%;
 	font-size: 16px;
+	padding: 0.75rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
+textarea:focus {
+	outline: none;
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
 input {
 	font-size: 16px;
+	padding: 0.75rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
+input:focus {
+	outline: none;
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
 table {
 	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 1.5rem;
 }
+th, td {
+	padding: 0.75rem;
+	text-align: left;
+	border-bottom: 1px solid var(--border);
+}
+th {
+	font-weight: 600;
+	background: var(--bg-tertiary);
+}
+
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: var(--radius-lg);
 }
+
 code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+	padding: 0.2em 0.4em;
+	background: var(--bg-tertiary);
+	border-radius: var(--radius-sm);
+	font-size: 0.875em;
+	font-family: var(--font-mono);
+	color: var(--accent-outline);
 }
+
 pre {
-	padding: 1.5em;
-	border-radius: 8px;
+	padding: 1.25rem;
+	border-radius: var(--radius-lg);
+	background: var(--bg-secondary);
+	overflow-x: auto;
+	margin-bottom: 1.5rem;
+	border: 1px solid var(--border);
 }
 pre > code {
 	all: unset;
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	line-height: 1.7;
+	background: none;
+	padding: 0;
+	color: var(--text-primary);
 }
+
 blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
+	border-left: 3px solid var(--accent);
+	padding: 1rem 1.25rem;
+	margin: 0 0 1.5rem 0;
+	background: var(--accent-subtle);
+	border-radius: 0 var(--radius) var(--radius) 0;
+	color: var(--text-secondary);
+	font-style: normal;
 }
+blockquote p:last-child {
+	margin-bottom: 0;
+}
+
 hr {
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	border-top: 1px solid var(--border);
+	margin: 2.5rem 0;
 }
-@media (max-width: 720px) {
+
+ul, ol {
+	margin: 0 0 1.5rem 0;
+	padding-left: 1.5rem;
+}
+li {
+	margin-bottom: 0.5rem;
+}
+li::marker {
+	color: var(--text-muted);
+}
+
+.prose {
+	max-width: var(--content-width);
+}
+
+.prose > * + * {
+	margin-top: 1.5em;
+}
+
+.prose h2 { margin-top: 2.5em; }
+.prose h3 { margin-top: 2em; }
+.prose h4 { margin-top: 1.5em; }
+
+.prose ul, .prose ol {
+	margin-bottom: 1.25rem;
+}
+
+.prose li {
+	margin-bottom: 0.4rem;
+}
+
+.prose a {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-color: var(--accent);
+}
+.prose a:hover {
+	text-decoration-color: var(--accent-hover);
+}
+
+.prose img {
+	margin: 2rem 0;
+}
+
+.prose pre {
+	margin: 1.75rem 0;
+}
+
+.prose blockquote {
+	margin: 1.75rem 0;
+}
+
+@media (max-width: 768px) {
 	body {
-		font-size: 18px;
+		font-size: 15px;
 	}
+	h1 { font-size: 2rem; }
+	h2 { font-size: 1.625rem; }
 	main {
-		padding: 1em;
+		padding: 0 1.25rem 3rem;
+	}
+}
+
+@media (max-width: 480px) {
+	body {
+		font-size: 14px;
+	}
+	h1 { font-size: 1.75rem; }
+	h2 { font-size: 1.5rem; }
+	h3 { font-size: 1.25rem; }
+	main {
+		padding: 0 1rem 2.5rem;
 	}
 }
 
@@ -144,12 +294,8 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
 	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
